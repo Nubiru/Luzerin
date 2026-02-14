@@ -4,7 +4,6 @@ import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { prophecyText } from "@/lib/content/prophecy";
 import Link from "next/link";
-import Image from "next/image";
 
 export function ProphecyScreen() {
   const [showButton, setShowButton] = useState(false);
@@ -23,9 +22,8 @@ export function ProphecyScreen() {
     <div className="relative w-full h-full bg-lz-prime flex items-center justify-center">
       {/* Title */}
       <h1
-        className={`absolute top-[3%] left-1/2 -translate-x-1/2 text-lz-cuart font-display text-5xl font-bold z-10 transition-opacity duration-500 ${
-          titleVisible ? "opacity-70" : "opacity-0"
-        }`}
+        className={`absolute top-[3%] left-1/2 -translate-x-1/2 text-lz-cuart font-display text-5xl font-bold z-10 transition-opacity duration-500 ${titleVisible ? "opacity-70" : "opacity-0"
+          }`}
       >
         Profecía
       </h1>
@@ -44,13 +42,11 @@ export function ProphecyScreen() {
         {prophecyText.paragraphs.map((para, idx) => (
           <div
             key={idx}
-            className={`${
-              para.type === "prophecy"
+            className={`${para.type === "prophecy"
                 ? "bg-lz-cuart border-4 border-lz-second text-lz-second font-black cursor-[url('/images/logos/colibriCursor.png'),_auto]"
                 : "bg-lz-second border-2 border-lz-terc text-white font-normal"
-            } rounded-3xl px-8 py-6 my-8 leading-relaxed tracking-wide ${
-              para.isLast ? "text-center max-w-[200px] mx-auto" : "max-w-[60vw] mx-auto indent-[7%]"
-            }`}
+              } rounded-3xl px-8 py-6 my-8 leading-relaxed tracking-wide ${para.isLast ? "text-center max-w-[200px] mx-auto" : "max-w-[60vw] mx-auto indent-[7%]"
+              }`}
           >
             {para.text}
           </div>
@@ -60,9 +56,8 @@ export function ProphecyScreen() {
       {/* Button */}
       <Button
         asChild
-        className={`absolute bottom-[2.5%] left-1/2 -translate-x-1/2 bg-lz-btn-teal text-lz-btn-three hover:bg-lz-btn-darkest hover:text-lz-btn-light border-4 hover:border-lz-btn-teal rounded-full px-8 py-6 text-lg font-bold transition-all duration-1000 ${
-          showButton ? "opacity-100" : "opacity-0"
-        } group`}
+        className={`absolute bottom-[2.5%] left-1/2 -translate-x-1/2 bg-lz-btn-teal text-lz-btn-three hover:bg-lz-btn-darkest hover:text-lz-btn-light border-4 hover:border-lz-btn-teal rounded-full px-8 py-6 text-lg font-bold transition-all duration-1000 ${showButton ? "opacity-100" : "opacity-0"
+          } group`}
       >
         <Link href="/mapa">
           Entrar{" "}

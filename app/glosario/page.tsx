@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { getAllEntries, searchEntries, getEntriesByCategory } from "@/lib/content/glossary";
+import { getAllEntries, searchEntries } from "@/lib/content/glossary";
 import { GlossaryCard } from "@/components/glossary/GlossaryCard";
 import { GlossarySearch } from "@/components/glossary/GlossarySearch";
 

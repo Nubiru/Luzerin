@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { GlossaryCard } from "@/components/glossary/GlossaryCard";
 import { GlossarySearch } from "@/components/glossary/GlossarySearch";
 import { getAllEntries, searchEntries } from "@/lib/content/glossary";
+import { useProgress } from "@/lib/hooks/useProgress";
 
 export default function GlosarioPage() {
+  const { progress, isLoaded } = useProgress();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -13,6 +15,15 @@ export default function GlosarioPage() {
 
   const filteredEntries = useMemo(() => {
     let entries = allEntries;
+
+    // Filter by progress (unlocked entries)
+    if (isLoaded) {
+      entries = entries.filter((entry) =>
+        progress.unlockedGlossaryIds.includes(entry.id),
+      );
+    } else {
+      return []; // Return empty while loading progress
+    }
 
     // Filter by search query
     if (searchQuery) {
@@ -25,7 +36,13 @@ export default function GlosarioPage() {
     }
 
     return entries;
-  }, [searchQuery, selectedCategory, allEntries]);
+  }, [
+    searchQuery,
+    selectedCategory,
+    allEntries,
+    isLoaded,
+    progress.unlockedGlossaryIds,
+  ]);
 
   return (
     <main className="min-h-screen bg-lz-second py-12">

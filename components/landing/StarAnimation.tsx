@@ -45,10 +45,7 @@ export function StarAnimation({ onComplete }: StarAnimationProps) {
           onMouseEnter={handleStarHover}
           onKeyUp={(e) => e.key === "Enter" && handleStarHover()}
         >
-          <div className="w-[200px] h-[140px] relative">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[2px] h-[140px] bg-white shadow-[0_0_20px_5px_rgba(255,255,255,0.8)]" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[2px] bg-white shadow-[0_0_20px_5px_rgba(255,255,255,0.8)]" />
-          </div>
+          <div className="w-[200px] h-[140px] relative" />
         </button>
       )}
 
@@ -62,7 +59,7 @@ export function StarAnimation({ onComplete }: StarAnimationProps) {
         >
           <div className="relative w-[300px] h-[300px] rounded-full overflow-hidden">
             <Image
-              src="/images/backgrounds/0.jpeg"
+              src="/images/backgrounds/corona.jpg"
               alt="Corona Solar"
               fill
               className="object-cover animate-spin-slow opacity-80"

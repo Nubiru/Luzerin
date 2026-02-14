@@ -4,42 +4,112 @@
     "name": "Inara Zem",
     "category": "character",
     "description": "Bruja y profeta, madre de Pola Cuyé. Poseedora de gran poder mágico y conocimiento ancestral. Protege el secreto del collar ancestral.",
-    "firstAppearance": "Prólogo",
+    "firstAppearance": "Capítulo 1",
     "aliases": ["La Profeta"]
   },
   {
     "id": "pola-cuye",
     "name": "Pola Cuyé",
     "category": "character",
-    "description": "Hija de Inara Zem y madre de Anahí. Sus recuerdos fueron borrados por un hechizo de protección.",
-    "firstAppearance": "Prólogo"
+    "description": "Hija de Inara Zem y madre de Anahí. Sus recuerdos fueron borrados por un hechizo de protección para ocultar su origen mágico.",
+    "firstAppearance": "Capítulo 1"
   },
   {
     "id": "anahi",
-    "name": "Anahí",
+    "name": "Anahí Zem",
     "category": "character",
-    "description": "Nieta de Inara Zem, joven con un destino especial conectado a la profecía del colibrí.",
-    "firstAppearance": "Prólogo"
+    "description": "Protagonista de la saga, joven con un destino especial conectado a la profecía del colibrí y portadora del Collar Ancestral.",
+    "firstAppearance": "Capítulo 1"
+  },
+  {
+    "id": "rafael",
+    "name": "Rafael",
+    "category": "character",
+    "description": "Compañero de Pola y figura paterna de Anahí. Un hombre amable que intenta mantener la normalidad en la familia.",
+    "firstAppearance": "Capítulo 2"
+  },
+  {
+    "id": "irupe",
+    "name": "Irupé Zem",
+    "category": "character",
+    "description": "Hermana de Anahí, estudiante de danza con una personalidad vibrante y afectuosa.",
+    "firstAppearance": "Capítulo 2"
+  },
+  {
+    "id": "sonia-racon",
+    "name": "Sonia Racón",
+    "category": "character",
+    "description": "Mejor amiga de Anahí, leal y directa, quien la acompaña en el descubrimiento del mundo mágico.",
+    "firstAppearance": "Capítulo 3"
+  },
+  {
+    "id": "alexia-crizo",
+    "name": "Alexia Crizo",
+    "category": "character",
+    "description": "Bruja poderosa y antigua amiga de Inara Zem. Juega un papel crucial en el traslado a la Fortaleza.",
+    "firstAppearance": "Capítulo 5"
+  },
+  {
+    "id": "yara-buila",
+    "name": "Yara Buila",
+    "category": "character",
+    "description": "Representante General de Lúzerin, mentora de Anahí en las artes mágicas.",
+    "firstAppearance": "Capítulo 1 (Libro 2)"
+  },
+  {
+    "id": "william-dervish",
+    "name": "William Dervish",
+    "category": "character",
+    "description": "Embajador y principal antagonista, obsesionado con destruir Lúzerin y obtener el poder del NAM.",
+    "firstAppearance": "Capítulo 3 (Libro 2)"
   },
   {
     "id": "luzerin",
     "name": "Lúzerin",
     "category": "item",
-    "description": "El colibrí sagrado, tributo esculpido por orfebres ancestrales. Símbolo de esperanza y salvación según la profecía.",
-    "firstAppearance": "Profecía"
+    "description": "El colibrí sagrado, símbolo de esperanza y salvación según la profecía. También da nombre a la Fortaleza.",
+    "firstAppearance": "Capítulo 1"
   },
   {
     "id": "collar-ancestral",
     "name": "Collar Ancestral",
     "category": "item",
-    "description": "Reliquia mágica de gran poder, protegida por Inara Zem. Su descubrimiento podría cambiar el equilibrio del mundo mágico.",
-    "firstAppearance": "Prólogo"
+    "description": "Reliquia mágica con forma de reloj de arena entregada por Inara a Anahí para su protección.",
+    "firstAppearance": "Capítulo 1"
+  },
+  {
+    "id": "tacuara-luzerin",
+    "name": "Tacuara de Lúzerin",
+    "category": "item",
+    "description": "Artefacto mágico y arma formidable que se vincula con el alma de la SISA.",
+    "firstAppearance": "Capítulo 1 (Libro 2)"
+  },
+  {
+    "id": "nam",
+    "name": "NAM (Núcleo del Átomo Madre)",
+    "category": "concept",
+    "description": "La fuente primordial de magia en el mundo de Lúzerin, protegida en la Fortaleza.",
+    "firstAppearance": "Capítulo 6"
+  },
+  {
+    "id": "sisa",
+    "name": "SISA",
+    "category": "concept",
+    "description": "La guerrera espiritual de Lúzerin, elegida por el NAM para defender el mundo mágico.",
+    "firstAppearance": "Capítulo 1 (Libro 2)"
   },
   {
     "id": "fortaleza-colibri",
     "name": "Fortaleza del Colibrí",
     "category": "place",
-    "description": "Lugar sagrado donde se resguarda el legado del colibrí Lúzerin.",
+    "description": "Lugar sagrado y refugio de la resistencia mágica, oculto en la cordillera.",
+    "firstAppearance": "Capítulo 1"
+  },
+  {
+    "id": "pierrots",
+    "name": "Pierrots",
+    "category": "enemy",
+    "description": "Soldados enmascarados al servicio del Ministerio de Magia, perseguidores de la estirpe Zem.",
     "firstAppearance": "Capítulo 1"
   }
 ]

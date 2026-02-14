@@ -15,7 +15,7 @@ export function ProphecyScreen() {
     if (scrollRef.current) {
       const scrollTop = scrollRef.current.scrollTop;
       setTitleVisible(scrollTop < 50);
-      setShowButton(scrollTop > 400);
+      setShowButton(scrollTop > 100);
     }
   };
 
@@ -39,8 +39,7 @@ export function ProphecyScreen() {
         onScroll={handleScroll}
         className="relative max-w-[1300px] w-[80vw] h-[90vh] rounded-2xl p-12 md:p-24 overflow-y-auto"
         style={{
-          backgroundImage:
-            "url('/images/backgrounds/Fondo General Pergamino.jpeg')",
+          backgroundImage: "url('/images/backgrounds/profBg.jpg')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}

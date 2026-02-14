@@ -5,18 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useProgress } from "@/lib/hooks/useProgress";
+import { glossary } from "@/lib/content/glossary";
 import type { Book, Chapter } from "@/lib/types/content";
 
 interface ChapterReaderProps {
   book: Book;
   chapter: Chapter;
 }
-
 export function ChapterReader({ book, chapter }: ChapterReaderProps) {
+  const { unlockChapter, unlockGlossaryEntry, isLoaded } = useProgress();
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   // Find current chapter index to determine previous and next chapters
-  // We use chapter.number matching, assuming chapters are sorted or indexed correctly
   const currentIndex = book.chapters.findIndex(
     (ch) => ch.number === chapter.number,
   );
@@ -25,6 +26,36 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
     currentIndex < book.chapters.length - 1
       ? book.chapters[currentIndex + 1]
       : null;
+
+  useEffect(() => {
+    if (isLoaded) {
+      // Mark current chapter as unlocked
+      unlockChapter(book.id, chapter.number);
+
+      // If there's a next chapter, unlock it too (progressive unlocking)
+      if (nextChapter) {
+        unlockChapter(book.id, nextChapter.number);
+      }
+
+      // Unlock glossary entries for this chapter
+      // We search for entries where firstAppearance matches "Capítulo X"
+      const firstAppearanceStr = `Capítulo ${chapter.number}`;
+      const toUnlock = glossary
+        .filter((entry) => entry.firstAppearance === firstAppearanceStr)
+        .map((entry) => entry.id);
+
+      if (toUnlock.length > 0) {
+        unlockGlossaryEntry(toUnlock);
+      }
+    }
+  }, [
+    isLoaded,
+    chapter.number,
+    book.id,
+    nextChapter,
+    unlockChapter,
+    unlockGlossaryEntry,
+  ]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +91,7 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
       </div>
 
       {/* Chapter Content */}
-      <article className="relative max-w-3xl mx-auto px-6 md:px-12 py-12 md:py-16">
+      <article className="relative max-w-5xl mx-auto px-6 md:px-12 py-12 md:py-16">
         {/* Chapter Header */}
         <header className="text-center mb-12 md:mb-16">
           <h1 className="text-4xl md:text-6xl font-display font-bold text-lz-cuart mb-4 tracking-tight drop-shadow-sm">
@@ -104,7 +135,7 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
             return (
               <p
                 key={trimmed.slice(0, 20)}
-                className="mb-8 text-white/90 leading-relaxed tracking-wide text-justify font-serif text-lg md:text-xl"
+                className="mb-8 text-white/95 leading-relaxed tracking-wide text-justify font-serif text-lg md:text-2xl indent-6 md:indent-12"
               >
                 {trimmed}
               </p>

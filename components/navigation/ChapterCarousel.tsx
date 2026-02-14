@@ -10,10 +10,15 @@ import type { Chapter } from "@/lib/types/content";
 interface ChapterCarouselProps {
   chapters: Chapter[];
   bookId: string;
+  initialIndex?: number;
 }
 
-export function ChapterCarousel({ chapters, bookId }: ChapterCarouselProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
+export function ChapterCarousel({
+  chapters,
+  bookId,
+  initialIndex = 0,
+}: ChapterCarouselProps) {
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
 
   const goToNext = () => {
     setActiveIndex((prev) => (prev + 1) % chapters.length);
@@ -25,7 +30,15 @@ export function ChapterCarousel({ chapters, bookId }: ChapterCarouselProps) {
 
   const activeChapter = chapters[activeIndex];
   const colors = ["#c0a288", "#8485d6", "#c8c9a0", "#a0b5c2"];
-  const colorIndex = activeIndex % colors.length;
+  const colorIndex = activeIndex >= 0 ? activeIndex % colors.length : 0;
+
+  if (!activeChapter) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-[#161616] rounded-[50px] text-white">
+        No hay capítulos disponibles.
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full h-full overflow-hidden rounded-[50px]">

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUp, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Book, Chapter } from "@/lib/types/content";
@@ -14,129 +14,144 @@ interface ChapterReaderProps {
 
 export function ChapterReader({ book, chapter }: ChapterReaderProps) {
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
 
-  const currentIndex = book.chapters.findIndex(ch => ch.number === chapter.number);
+  // Find current chapter index to determine previous and next chapters
+  // We use chapter.number matching, assuming chapters are sorted or indexed correctly
+  const currentIndex = book.chapters.findIndex((ch) => ch.number === chapter.number);
   const prevChapter = currentIndex > 0 ? book.chapters[currentIndex - 1] : null;
   const nextChapter = currentIndex < book.chapters.length - 1 ? book.chapters[currentIndex + 1] : null;
 
   useEffect(() => {
     const handleScroll = () => {
-      if (contentRef.current) {
-        const scrollTop = contentRef.current.scrollTop;
-        setShowBackToTop(scrollTop > 400);
-      }
+      // Use window.scrollY for the main document scroll
+      setShowBackToTop(window.scrollY > 400);
     };
 
-    const ref = contentRef.current;
-    ref?.addEventListener('scroll', handleScroll);
-    return () => ref?.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToTop = () => {
-    contentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <div className="relative w-full min-h-screen bg-lz-second">
+      {/* Navigation Bar (Sticky Top) */}
+      <div className="sticky top-0 z-40 w-full bg-lz-second/95 backdrop-blur shadow-sm border-b border-lz-terc/20 px-4 py-3 flex justify-between items-center transition-all duration-300">
+        <Link href={`/lectura/${book.id}`} className="text-lz-cuart hover:text-white flex items-center gap-2 font-display text-sm md:text-base transition-colors">
+          <ChevronLeft className="h-4 w-4" />
+          <span className="hidden sm:inline">Volver al Índice</span>
+          <span className="sm:hidden">Índice</span>
+        </Link>
+        <span className="text-white/80 text-xs md:text-sm font-light tracking-wide truncate max-w-[150px] md:max-w-xs text-center">
+          {chapter.title}
+        </span>
+        <div className="w-[80px] sm:w-[100px] flex justify-end"></div> {/* Spacer for alignment */}
+      </div>
+
       {/* Chapter Content */}
-      <div
-        ref={contentRef}
-        className="relative max-w-4xl mx-auto px-6 md:px-12 py-12 overflow-y-auto h-screen"
-      >
+      <article className="relative max-w-3xl mx-auto px-6 md:px-12 py-12 md:py-16">
         {/* Chapter Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-display font-bold text-lz-cuart mb-4">
+        <header className="text-center mb-12 md:mb-16">
+          <h1 className="text-4xl md:text-6xl font-display font-bold text-lz-cuart mb-4 tracking-tight drop-shadow-sm">
             Capítulo {chapter.number}
           </h1>
-          <h2 className="text-2xl md:text-3xl text-lz-terc font-semibold">
+          <h2 className="text-2xl md:text-3xl text-white font-serif font-medium mt-2">
             {chapter.title}
           </h2>
-        </div>
+        </header>
 
         {/* Chapter Image */}
         {chapter.image && (
-          <div className="relative w-full h-[300px] md:h-[400px] mb-16 rounded-2xl overflow-hidden shadow-xl">
+          <div className="relative w-full aspect-[16/9] mb-12 md:mb-16 rounded-xl overflow-hidden shadow-2xl border border-white/10">
             <Image
               src={chapter.image}
-              alt={`Capítulo ${chapter.number}`}
+              alt={`Ilustración del Capítulo ${chapter.number}`}
               fill
-              className="object-cover"
+              className="object-cover hover:scale-105 transition-transform duration-700"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
             />
           </div>
         )}
 
-        {/* Chapter Text */}
-        <div className="prose prose-lg prose-invert max-w-none">
-          {chapter.content.split('\n\n').map((paragraph, idx) => (
-            <p
-              key={idx}
-              className="mb-6 text-white leading-relaxed tracking-wide text-justify indent-8"
-            >
-              {paragraph}
-            </p>
-          ))}
-        </div>
-
         {/* Reading Info */}
-        <div className="mt-12 p-6 bg-lz-prime/50 rounded-xl text-center">
-          <p className="text-lz-cuart font-semibold">
-            {chapter.wordCount.toLocaleString()} palabras • {chapter.readingTime} min de lectura
-          </p>
+        <div className="flex justify-center items-center gap-6 mb-12 text-sm text-lz-cuart/80 font-mono border-t border-b border-white/10 py-4">
+          <span className="flex items-center gap-2"><BookOpen className="h-4 w-4" /> {chapter.wordCount.toLocaleString()} palabras</span>
+          <span>•</span>
+          <span>{chapter.readingTime} min de lectura</span>
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-between items-center mt-12 mb-24">
+        {/* Chapter Text */}
+        <div className="prose prose-lg md:prose-xl prose-invert max-w-none text-lz-theme-light-text/90">
+          {/* We use a specific text color that contrasts well on bg-lz-second */}
+          {chapter.content.split("\n\n").map((paragraph, idx) => {
+            const trimmed = paragraph.trim();
+            if (!trimmed) return null;
+            return (
+              <p
+                key={idx}
+                className="mb-8 text-white/90 leading-relaxed tracking-wide text-justify font-serif text-lg md:text-xl"
+              >
+                {trimmed}
+              </p>
+            );
+          })}
+        </div>
+
+        {/* Navigation Buttons Footer */}
+        <nav className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-16 pt-12 border-t border-white/10">
           {prevChapter ? (
             <Button
               asChild
               variant="outline"
-              className="bg-lz-btn-teal hover:bg-lz-btn-darkest text-lz-btn-darkest hover:text-lz-btn-light"
+              className="w-full sm:w-auto bg-transparent border-lz-terc text-lz-terc hover:bg-lz-terc hover:text-white transition-all group"
             >
-              <Link href={`/lectura/${book.id}/${prevChapter.number}`}>
-                <ChevronLeft className="mr-2 h-4 w-4" />
-                Capítulo {prevChapter.number}
+              <Link href={`/lectura/${book.id}/${prevChapter.number}`} className="flex items-center gap-2">
+                <ChevronLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+                <div>
+                  <span className="block text-xs opacity-70">Anterior</span>
+                  <span className="font-semibold max-w-[150px] truncate block">{prevChapter.title}</span>
+                </div>
               </Link>
             </Button>
           ) : (
-            <div></div>
+            <div className="w-full sm:w-auto"></div>
           )}
-
-          <Button
-            asChild
-            variant="outline"
-            className="bg-lz-terc hover:bg-lz-prime text-white"
-          >
-            <Link href="/mapa">Volver al Mapa</Link>
-          </Button>
 
           {nextChapter ? (
             <Button
               asChild
               variant="outline"
-              className="bg-lz-btn-teal hover:bg-lz-btn-darkest text-lz-btn-darkest hover:text-lz-btn-light"
+              className="w-full sm:w-auto bg-transparent border-lz-cuart text-lz-cuart hover:bg-lz-cuart hover:text-lz-prime transition-all group"
             >
-              <Link href={`/lectura/${book.id}/${nextChapter.number}`}>
-                Capítulo {nextChapter.number}
-                <ChevronRight className="ml-2 h-4 w-4" />
+              <Link href={`/lectura/${book.id}/${nextChapter.number}`} className="flex items-center gap-2">
+                <div className="text-right">
+                  <span className="block text-xs opacity-70">Siguiente</span>
+                  <span className="font-semibold max-w-[150px] truncate block">{nextChapter.title}</span>
+                </div>
+                <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
           ) : (
-            <div></div>
+            <div className="w-full sm:w-auto"></div>
           )}
-        </div>
-      </div>
+        </nav>
+      </article>
 
       {/* Back to Top Button */}
-      {showBackToTop && (
+      <div className={`fixed bottom-8 right-8 z-50 transition-opacity duration-300 ${showBackToTop ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
         <Button
           onClick={scrollToTop}
           size="icon"
-          className="fixed bottom-8 right-8 rounded-full bg-lz-cuart hover:bg-lz-terc text-lz-prime shadow-lg z-50"
+          className="rounded-full h-12 w-12 bg-lz-cuart text-lz-prime hover:bg-white hover:text-lz-prime shadow-xl border-2 border-lz-prime"
+          aria-label="Volver arriba"
         >
-          <ArrowUp className="h-5 w-5" />
+          <ArrowUp className="h-6 w-6" />
         </Button>
-      )}
+      </div>
     </div>
   );
 }
+

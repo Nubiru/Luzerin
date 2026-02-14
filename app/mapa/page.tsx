@@ -1,0 +1,27 @@
+import { ChapterCarousel } from "@/components/navigation/ChapterCarousel";
+import { InteractiveMap } from "@/components/navigation/InteractiveMap";
+import { getAllBooks } from "@/lib/content/books";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata = createMetadata({
+  title: "Mapa de Navegación",
+  description: "Explora el mapa interactivo y navega por los capítulos de la saga Lúzerin",
+  path: "/mapa"
+});
+
+export default function MapaPage() {
+  const books = getAllBooks();
+  const book1 = books[0];
+  
+  // Show first 10 chapters for demo
+  const chapters = book1.chapters.slice(0, 10);
+
+  return (
+    <main className="relative w-full h-screen overflow-hidden bg-[#fafafa] pt-4">
+      <div className="relative w-[90vw] h-[85vh] mx-auto">
+        <InteractiveMap />
+        <ChapterCarousel chapters={chapters} bookId={book1.id} />
+      </div>
+    </main>
+  );
+}

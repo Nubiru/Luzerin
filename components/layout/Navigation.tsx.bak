@@ -1,0 +1,46 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "./ThemeToggle";
+
+const navItems = [
+  { href: "/", label: "Inicio" },
+  { href: "/mapa", label: "Mapa" },
+  { href: "/lectura", label: "Lectura" },
+  { href: "/glosario", label: "Glosario" },
+];
+
+export function Navigation() {
+  const pathname = usePathname();
+
+  return (
+    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center justify-between">
+        <div className="flex items-center gap-6">
+          <Link href="/" className="font-display text-2xl font-bold text-lz-prime">
+            Lúzerin
+          </Link>
+          
+          <ul className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>
+                  <Button
+                    variant={pathname === item.href ? "default" : "ghost"}
+                    size="sm"
+                  >
+                    {item.label}
+                  </Button>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <ThemeToggle />
+      </div>
+    </nav>
+  );
+}

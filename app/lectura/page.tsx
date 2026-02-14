@@ -1,0 +1,57 @@
+import { getAllBooks } from "@/lib/content/books";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata = createMetadata({
+  title: "Lectura",
+  description: "Lee los libros de la saga Lúzerin: La Fortaleza del Colibrí y El Tango de la Muerte",
+  path: "/lectura"
+});
+
+export default function LecturaPage() {
+  const books = getAllBooks();
+
+  return (
+    <main className="min-h-screen bg-lz-second py-12">
+      <div className="container max-w-6xl">
+        <h1 className="text-4xl md:text-6xl font-display font-bold text-center text-lz-cuart mb-12">
+          Selecciona un Libro
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {books.map((book) => (
+            <Card key={book.id} className="overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="relative h-64 w-full">
+                <Image
+                  src={book.coverImage}
+                  alt={book.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-2xl font-display">{book.title}</CardTitle>
+                {book.subtitle && (
+                  <CardDescription className="text-lg">{book.subtitle}</CardDescription>
+                )}
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {book.chapters.length} capítulos • {book.totalWords.toLocaleString()} palabras
+                </p>
+                <Button asChild className="w-full">
+                  <Link href={`/lectura/${book.id}/1`}>
+                    Comenzar a Leer
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}

@@ -1,0 +1,45 @@
+[
+  {
+    "id": "inara-zem",
+    "name": "Inara Zem",
+    "category": "character",
+    "description": "Bruja y profeta, madre de Pola Cuyé. Poseedora de gran poder mágico y conocimiento ancestral. Protege el secreto del collar ancestral.",
+    "firstAppearance": "Prólogo",
+    "aliases": ["La Profeta"]
+  },
+  {
+    "id": "pola-cuye",
+    "name": "Pola Cuyé",
+    "category": "character",
+    "description": "Hija de Inara Zem y madre de Anahí. Sus recuerdos fueron borrados por un hechizo de protección.",
+    "firstAppearance": "Prólogo"
+  },
+  {
+    "id": "anahi",
+    "name": "Anahí",
+    "category": "character",
+    "description": "Nieta de Inara Zem, joven con un destino especial conectado a la profecía del colibrí.",
+    "firstAppearance": "Prólogo"
+  },
+  {
+    "id": "luzerin",
+    "name": "Lúzerin",
+    "category": "item",
+    "description": "El colibrí sagrado, tributo esculpido por orfebres ancestrales. Símbolo de esperanza y salvación según la profecía.",
+    "firstAppearance": "Profecía"
+  },
+  {
+    "id": "collar-ancestral",
+    "name": "Collar Ancestral",
+    "category": "item",
+    "description": "Reliquia mágica de gran poder, protegida por Inara Zem. Su descubrimiento podría cambiar el equilibrio del mundo mágico.",
+    "firstAppearance": "Prólogo"
+  },
+  {
+    "id": "fortaleza-colibri",
+    "name": "Fortaleza del Colibrí",
+    "category": "place",
+    "description": "Lugar sagrado donde se resguarda el legado del colibrí Lúzerin.",
+    "firstAppearance": "Capítulo 1"
+  }
+]

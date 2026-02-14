@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Search, X } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface GlossarySearchProps {
   onSearch: (query: string) => void;
@@ -16,10 +16,14 @@ const categories = [
   { id: "place", label: "Lugares" },
   { id: "item", label: "Objetos" },
   { id: "term", label: "Términos" },
-  { id: "creature", label: "Criaturas" }
+  { id: "creature", label: "Criaturas" },
 ];
 
-export function GlossarySearch({ onSearch, onCategoryFilter, selectedCategory }: GlossarySearchProps) {
+export function GlossarySearch({
+  onSearch,
+  onCategoryFilter,
+  selectedCategory,
+}: GlossarySearchProps) {
   const [query, setQuery] = useState("");
 
   const handleSearch = (value: string) => {

@@ -1,14 +1,11 @@
-import type { Book } from "../types/content";
 import book1Data from "@/data/books/book-1.json";
 import book2Data from "@/data/books/book-2.json";
+import type { Book } from "../types/content";
 
-export const books: Book[] = [
-  book1Data as Book,
-  book2Data as Book
-];
+export const books: Book[] = [book1Data as Book, book2Data as Book];
 
 export function getBook(bookId: string): Book | undefined {
-  return books.find(book => book.id === bookId);
+  return books.find((book) => book.id === bookId);
 }
 
 export function getAllBooks(): Book[] {
@@ -17,5 +14,5 @@ export function getAllBooks(): Book[] {
 
 export function getChapter(bookId: string, chapterNumber: number) {
   const book = getBook(bookId);
-  return book?.chapters.find(ch => ch.number === chapterNumber);
+  return book?.chapters.find((ch) => ch.number === chapterNumber);
 }

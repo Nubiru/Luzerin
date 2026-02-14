@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 
 interface MapLocation {
   id: string;
@@ -12,10 +12,30 @@ interface MapLocation {
 }
 
 const locations: MapLocation[] = [
-  { id: "cumen", name: "Cumén", position: { top: "43%", left: "36.5%" }, disabled: true },
-  { id: "luzerin", name: "Luzerin", position: { top: "78%", left: "24.5%" }, disabled: true },
-  { id: "mnus", name: "Mina Usina", position: { top: "50%", left: "16.5%" }, disabled: true },
-  { id: "cllsns", name: "Calle de las Sensaciones", position: { top: "72%", left: "27.5%" }, disabled: false }
+  {
+    id: "cumen",
+    name: "Cumén",
+    position: { top: "43%", left: "36.5%" },
+    disabled: true,
+  },
+  {
+    id: "luzerin",
+    name: "Luzerin",
+    position: { top: "78%", left: "24.5%" },
+    disabled: true,
+  },
+  {
+    id: "mnus",
+    name: "Mina Usina",
+    position: { top: "50%", left: "16.5%" },
+    disabled: true,
+  },
+  {
+    id: "cllsns",
+    name: "Calle de las Sensaciones",
+    position: { top: "72%", left: "27.5%" },
+    disabled: false,
+  },
 ];
 
 export function InteractiveMap() {
@@ -30,7 +50,7 @@ export function InteractiveMap() {
           fill
           className="object-cover"
         />
-        
+
         {locations.map((location) => (
           <Button
             key={location.id}
@@ -44,7 +64,7 @@ export function InteractiveMap() {
             }`}
             style={{
               top: location.position.top,
-              left: location.position.left
+              left: location.position.left,
             }}
           >
             <span

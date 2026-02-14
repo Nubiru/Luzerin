@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 
 interface StarAnimationProps {
   onComplete: () => void;
@@ -38,32 +38,37 @@ export function StarAnimation({ onComplete }: StarAnimationProps) {
 
       {/* Star */}
       {showStar && (
-        <div
-          className="relative cursor-pointer transition-transform duration-[8000ms] hover:scale-[50]"
+        <button
+          type="button"
+          aria-label="Star"
+          className="relative cursor-pointer transition-transform duration-[8000ms] hover:scale-[50] focus:outline-none"
           onMouseEnter={handleStarHover}
+          onKeyUp={(e) => e.key === "Enter" && handleStarHover()}
         >
           <div className="w-[200px] h-[140px] relative">
-            {/* CSS Star shape - simplified for now */}
-            <div className="absolute inset-0 bg-lz-second clip-star"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[2px] h-[140px] bg-white shadow-[0_0_20px_5px_rgba(255,255,255,0.8)]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[2px] bg-white shadow-[0_0_20px_5px_rgba(255,255,255,0.8)]" />
           </div>
-        </div>
+        </button>
       )}
 
       {/* Corona */}
       {showCorona && (
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-[5000ms] ease-in-out hover:scale-50"
+        <button
+          type="button"
+          aria-label="Corona"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-[5000ms] ease-in-out hover:scale-50 focus:outline-none"
           onClick={handleCoronaClick}
         >
           <div className="relative w-[300px] h-[300px] rounded-full overflow-hidden">
             <Image
-              src="/images/backgrounds/corona.jpg"
-              alt="Corona"
+              src="/images/backgrounds/0.jpeg"
+              alt="Corona Solar"
               fill
-              className="object-cover"
+              className="object-cover animate-spin-slow opacity-80"
             />
           </div>
-        </div>
+        </button>
       )}
 
       {/* Subtitle */}

@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { getAllEntries, searchEntries } from "@/lib/content/glossary";
+import { useMemo, useState } from "react";
 import { GlossaryCard } from "@/components/glossary/GlossaryCard";
 import { GlossarySearch } from "@/components/glossary/GlossarySearch";
+import { getAllEntries, searchEntries } from "@/lib/content/glossary";
 
 export default function GlosarioPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,7 +21,7 @@ export default function GlosarioPage() {
 
     // Filter by category
     if (selectedCategory) {
-      entries = entries.filter(entry => entry.category === selectedCategory);
+      entries = entries.filter((entry) => entry.category === selectedCategory);
     }
 
     return entries;
@@ -34,7 +34,8 @@ export default function GlosarioPage() {
           Glosario
         </h1>
         <p className="text-center text-lz-terc mb-12 max-w-2xl mx-auto">
-          Explora los personajes, lugares, objetos y términos del mundo de Lúzerin
+          Explora los personajes, lugares, objetos y términos del mundo de
+          Lúzerin
         </p>
 
         <div className="mb-8">
@@ -54,7 +55,8 @@ export default function GlosarioPage() {
         ) : (
           <>
             <p className="text-sm text-muted-foreground mb-4">
-              Mostrando {filteredEntries.length} {filteredEntries.length === 1 ? "resultado" : "resultados"}
+              Mostrando {filteredEntries.length}{" "}
+              {filteredEntries.length === 1 ? "resultado" : "resultados"}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredEntries.map((entry) => (

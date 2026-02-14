@@ -1,10 +1,10 @@
 "use client";
 
+import { AlertCircle } from "lucide-react";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { AlertCircle } from "lucide-react";
 
-export default function Error({
+export default function ErrorPage({
   error,
   reset,
 }: {
@@ -34,7 +34,7 @@ export default function Error({
             Intentar Nuevamente
           </Button>
           <Button
-            onClick={() => window.location.href = "/"}
+            onClick={() => (window.location.href = "/")}
             variant="outline"
             size="lg"
           >

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowUp, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
-import Link from "next/link";
+import { ArrowUp, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import type { Book, Chapter } from "@/lib/types/content";
 
 interface ChapterReaderProps {
@@ -17,9 +17,14 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
 
   // Find current chapter index to determine previous and next chapters
   // We use chapter.number matching, assuming chapters are sorted or indexed correctly
-  const currentIndex = book.chapters.findIndex((ch) => ch.number === chapter.number);
+  const currentIndex = book.chapters.findIndex(
+    (ch) => ch.number === chapter.number,
+  );
   const prevChapter = currentIndex > 0 ? book.chapters[currentIndex - 1] : null;
-  const nextChapter = currentIndex < book.chapters.length - 1 ? book.chapters[currentIndex + 1] : null;
+  const nextChapter =
+    currentIndex < book.chapters.length - 1
+      ? book.chapters[currentIndex + 1]
+      : null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +44,10 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
     <div className="relative w-full min-h-screen bg-lz-second">
       {/* Navigation Bar (Sticky Top) */}
       <div className="sticky top-0 z-40 w-full bg-lz-second/95 backdrop-blur shadow-sm border-b border-lz-terc/20 px-4 py-3 flex justify-between items-center transition-all duration-300">
-        <Link href={`/lectura/${book.id}`} className="text-lz-cuart hover:text-white flex items-center gap-2 font-display text-sm md:text-base transition-colors">
+        <Link
+          href={`/lectura/${book.id}`}
+          className="text-lz-cuart hover:text-white flex items-center gap-2 font-display text-sm md:text-base transition-colors"
+        >
           <ChevronLeft className="h-4 w-4" />
           <span className="hidden sm:inline">Volver al Índice</span>
           <span className="sm:hidden">Índice</span>
@@ -47,7 +55,8 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
         <span className="text-white/80 text-xs md:text-sm font-light tracking-wide truncate max-w-[150px] md:max-w-xs text-center">
           {chapter.title}
         </span>
-        <div className="w-[80px] sm:w-[100px] flex justify-end"></div> {/* Spacer for alignment */}
+        <div className="w-[80px] sm:w-[100px] flex justify-end"></div>{" "}
+        {/* Spacer for alignment */}
       </div>
 
       {/* Chapter Content */}
@@ -78,7 +87,10 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
 
         {/* Reading Info */}
         <div className="flex justify-center items-center gap-6 mb-12 text-sm text-lz-cuart/80 font-mono border-t border-b border-white/10 py-4">
-          <span className="flex items-center gap-2"><BookOpen className="h-4 w-4" /> {chapter.wordCount.toLocaleString()} palabras</span>
+          <span className="flex items-center gap-2">
+            <BookOpen className="h-4 w-4" />{" "}
+            {chapter.wordCount.toLocaleString()} palabras
+          </span>
           <span>•</span>
           <span>{chapter.readingTime} min de lectura</span>
         </div>
@@ -86,12 +98,12 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
         {/* Chapter Text */}
         <div className="prose prose-lg md:prose-xl prose-invert max-w-none text-lz-theme-light-text/90">
           {/* We use a specific text color that contrasts well on bg-lz-second */}
-          {chapter.content.split("\n\n").map((paragraph, idx) => {
+          {chapter.content.split("\n\n").map((paragraph) => {
             const trimmed = paragraph.trim();
             if (!trimmed) return null;
             return (
               <p
-                key={idx}
+                key={trimmed.slice(0, 20)}
                 className="mb-8 text-white/90 leading-relaxed tracking-wide text-justify font-serif text-lg md:text-xl"
               >
                 {trimmed}
@@ -108,11 +120,16 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
               variant="outline"
               className="w-full sm:w-auto bg-transparent border-lz-terc text-lz-terc hover:bg-lz-terc hover:text-white transition-all group"
             >
-              <Link href={`/lectura/${book.id}/${prevChapter.number}`} className="flex items-center gap-2">
+              <Link
+                href={`/lectura/${book.id}/${prevChapter.number}`}
+                className="flex items-center gap-2"
+              >
                 <ChevronLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
                 <div>
                   <span className="block text-xs opacity-70">Anterior</span>
-                  <span className="font-semibold max-w-[150px] truncate block">{prevChapter.title}</span>
+                  <span className="font-semibold max-w-[150px] truncate block">
+                    {prevChapter.title}
+                  </span>
                 </div>
               </Link>
             </Button>
@@ -126,10 +143,15 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
               variant="outline"
               className="w-full sm:w-auto bg-transparent border-lz-cuart text-lz-cuart hover:bg-lz-cuart hover:text-lz-prime transition-all group"
             >
-              <Link href={`/lectura/${book.id}/${nextChapter.number}`} className="flex items-center gap-2">
+              <Link
+                href={`/lectura/${book.id}/${nextChapter.number}`}
+                className="flex items-center gap-2"
+              >
                 <div className="text-right">
                   <span className="block text-xs opacity-70">Siguiente</span>
-                  <span className="font-semibold max-w-[150px] truncate block">{nextChapter.title}</span>
+                  <span className="font-semibold max-w-[150px] truncate block">
+                    {nextChapter.title}
+                  </span>
                 </div>
                 <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -141,7 +163,9 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
       </article>
 
       {/* Back to Top Button */}
-      <div className={`fixed bottom-8 right-8 z-50 transition-opacity duration-300 ${showBackToTop ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+      <div
+        className={`fixed bottom-8 right-8 z-50 transition-opacity duration-300 ${showBackToTop ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      >
         <Button
           onClick={scrollToTop}
           size="icon"
@@ -154,4 +178,3 @@ export function ChapterReader({ book, chapter }: ChapterReaderProps) {
     </div>
   );
 }
-

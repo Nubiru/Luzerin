@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 export const siteConfig = {
   name: "Lúzerin",
-  description: "La Saga del Colibrí - Plataforma de lectura digital por N. de Monteagudo",
+  description:
+    "La Saga del Colibrí - Plataforma de lectura digital por N. de Monteagudo",
   url: "https://luzerin.com",
   ogImage: "/images/logos/Logo.jpeg",
   author: "N. de Monteagudo",
@@ -15,15 +16,15 @@ export const siteConfig = {
     "hechicería",
     "libro digital",
     "e-book",
-    "lectura online"
-  ]
+    "lectura online",
+  ],
 };
 
 export function createMetadata({
   title,
   description,
   path = "",
-  image
+  image,
 }: {
   title?: string;
   description?: string;
@@ -52,19 +53,19 @@ export function createMetadata({
           url: pageImage,
           width: 1200,
           height: 630,
-          alt: pageTitle
-        }
-      ]
+          alt: pageTitle,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: pageTitle,
       description: pageDescription,
-      images: [pageImage]
+      images: [pageImage],
     },
     robots: {
       index: true,
-      follow: true
-    }
+      follow: true,
+    },
   };
 }

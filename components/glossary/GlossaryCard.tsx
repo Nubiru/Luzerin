@@ -1,10 +1,23 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import type { GlossaryEntry } from "@/lib/types/content";
 import { Book, MapPin, Package, Scroll } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import type { GlossaryEntry } from "@/lib/types/content";
 
 interface GlossaryCardProps {
   entry: GlossaryEntry;
@@ -15,7 +28,7 @@ const categoryIcons = {
   place: MapPin,
   item: Package,
   term: Scroll,
-  creature: Book
+  creature: Book,
 };
 
 const categoryColors = {
@@ -23,7 +36,7 @@ const categoryColors = {
   place: "bg-green-500",
   item: "bg-amber-500",
   term: "bg-purple-500",
-  creature: "bg-red-500"
+  creature: "bg-red-500",
 };
 
 export function GlossaryCard({ entry }: GlossaryCardProps) {
@@ -36,14 +49,18 @@ export function GlossaryCard({ entry }: GlossaryCardProps) {
           <CardHeader>
             <div className="flex items-start justify-between">
               <div className="flex-1">
-                <CardTitle className="text-xl font-display">{entry.name}</CardTitle>
+                <CardTitle className="text-xl font-display">
+                  {entry.name}
+                </CardTitle>
                 {entry.aliases && entry.aliases.length > 0 && (
                   <CardDescription className="text-sm italic mt-1">
                     También conocido como: {entry.aliases.join(", ")}
                   </CardDescription>
                 )}
               </div>
-              <Badge className={`${categoryColors[entry.category]} text-white ml-2`}>
+              <Badge
+                className={`${categoryColors[entry.category]} text-white ml-2`}
+              >
                 <Icon className="h-3 w-3 mr-1" />
                 {entry.category === "character" && "Personaje"}
                 {entry.category === "place" && "Lugar"}
@@ -93,7 +110,9 @@ export function GlossaryCard({ entry }: GlossaryCardProps) {
               <h4 className="font-semibold mb-2">Términos Relacionados</h4>
               <div className="flex flex-wrap gap-2">
                 {entry.relatedTerms.map((term) => (
-                  <Badge key={term} variant="outline">{term}</Badge>
+                  <Badge key={term} variant="outline">
+                    {term}
+                  </Badge>
                 ))}
               </div>
             </div>

@@ -5,14 +5,15 @@ import { createMetadata } from "@/lib/metadata";
 
 export const metadata = createMetadata({
   title: "Mapa de Navegación",
-  description: "Explora el mapa interactivo y navega por los capítulos de la saga Lúzerin",
-  path: "/mapa"
+  description:
+    "Explora el mapa interactivo y navega por los capítulos de la saga Lúzerin",
+  path: "/mapa",
 });
 
 export default function MapaPage() {
   const books = getAllBooks();
   const book1 = books[0];
-  
+
   // Show first 10 chapters for demo
   const chapters = book1.chapters.slice(0, 10);
 

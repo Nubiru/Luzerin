@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat, Roboto } from "next/font/google";
 import "./globals.css";
-import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
+import { Navigation } from "@/components/layout/Navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
@@ -28,9 +28,23 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  ),
   title: "Lúzerin - La Saga del Colibrí",
-  description: "Plataforma de lectura digital de la saga Lúzerin por N. de Monteagudo",
+  description:
+    "Plataforma de lectura digital de la saga Lúzerin por N. de Monteagudo",
+  icons: {
+    icon: "/images/branding/logo.png",
+    shortcut: "/images/branding/logo.png",
+    apple: "/images/branding/logo.png",
+  },
+  openGraph: {
+    title: "Lúzerin - La Saga del Colibrí",
+    description:
+      "Plataforma de lectura digital de la saga Lúzerin por N. de Monteagudo",
+    images: ["/images/branding/logo.png"],
+  },
 };
 
 export default function RootLayout({

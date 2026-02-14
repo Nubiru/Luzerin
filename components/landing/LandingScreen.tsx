@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { StarAnimation } from "./StarAnimation";
 import { ProphecyScreen } from "./ProphecyScreen";
+import { StarAnimation } from "./StarAnimation";
 
 export function LandingScreen() {
   const [showProphecy, setShowProphecy] = useState(false);

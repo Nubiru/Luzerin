@@ -1,0 +1,13 @@
+.next
+node_modules
+.cursor
+.context
+public
+*.config.js
+*.config.mjs
+*.config.ts
+package.json
+package-lock.json
+tsconfig.json
+**/*.css
+app/globals.css

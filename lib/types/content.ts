@@ -26,7 +26,7 @@ export interface Chapter {
 export interface GlossaryEntry {
   id: string;
   name: string;
-  category: 'character' | 'place' | 'item' | 'term' | 'creature';
+  category: "character" | "place" | "item" | "term" | "creature";
   description: string;
   image?: string;
   relatedTerms?: string[];
